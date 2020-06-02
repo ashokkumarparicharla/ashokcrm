@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>add customer</title>
+</head>
+<body>
+<form method="post">
+   name {{ request.user }}
+    {{ form }}
+    {% csrf_token %}
+    <input type="submit" value="save" class="btn btn-success">
+</form>
+</body>
+</html>

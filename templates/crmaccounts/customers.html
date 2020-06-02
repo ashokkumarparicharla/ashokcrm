@@ -1,0 +1,102 @@
+{% extends 'crmaccounts\base.html' %}
+
+<html>
+<head>
+    <title>customers</title>
+     <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% block content %}
+    <style>
+    p{margin-top: -10px;}
+    #h11{margin-top: 5px;
+        font-family: Algerian;
+    }
+    body{
+        background-color: lightcyan;
+    }
+    .p11{text-align: left
+    }
+
+    </style>
+    <h1 class="bg-primary text-center text-white" id="h11">{{ customers.cname }} Product Details</h1>
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md">
+            <div class="card text-center " style="background-color: chartreuse">
+                <div class="card-body">
+                     <a href="{% url 'update_customer' customers.id %}" class="btn btn-outline-success btn-block">Update Customer</a>
+                    <a href="{% url 'delete_customer' customers.id %}" class="btn btn-outline-danger btn-block">Delete customer</a>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card bg-info text-center text-white">
+                <div class="card-body">
+                    <h4>contact information</h4>
+                    <center>
+                        <p class="p11">mobile: {{ customers.mobile }} </p>
+
+                        <p class="p11"> email: {{ customers.email }}</p>
+                    </center>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card bg-primary text-center text-white">
+                <div class="card-body">
+                    <h4>Total Orders </h4>
+                    <p>{{ total_orders }}</p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered text-center table-hover">
+                        <thead>
+                        <tr class="bg-success">
+                            <th>Customer Name</th>
+                            <th>Product Name</th>
+                            <th>Product Category</th>
+                            <th>Product Price</th>
+                            <th>Product Status</th>
+                            <th>Ordered Date</th>
+                            <th>Product Update</th>
+                            <th>Product Delete</th>
+                        </tr>
+                         </thead>
+                        <tbody class="bg-secondor">
+                        {% for order in orders %}
+                            <tr>
+                            <td>{{ order.customer.cname }}</td>
+                            <td>{{ order.product.name}}</td>
+                            <td>{{ order.product.category }}</td>
+                            <td>{{ order.product.price }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.created_date }}</td>
+                                <td><a href="{% url 'update_customer' customers.id %}" class="btn btn-success">Update</a></td>
+                                <td><a href="{% url 'delete_customer' customers.id %}" class="btn btn-danger">Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+</body>
+</html>

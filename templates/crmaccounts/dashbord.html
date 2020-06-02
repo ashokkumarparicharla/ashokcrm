@@ -1,0 +1,84 @@
+{% extends 'crmaccounts/base.html' %}
+<html>
+<head>
+    <title>home</title>
+    <meta charset="utf-8">
+
+</head>
+<body>
+{% block content %}
+    <br>
+    {% include 'crmaccounts/status.html' %}
+    <br>
+    <div class="container-fluid" style="margin-top: 5px">
+        <div class="row">
+            <div class="col-md-4">
+                <br>
+                <center>
+                    <a class="btn btn-success" href="{% url 'create_order' %}">Place a Order</a>
+                </center><br>
+                <div class="card text-white text-center bg-dark">
+                    <div class="card-header">
+                        <h4 class="card-title">Ordered Customers</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered table-sm text-center bg-primary text-white">
+                            <thead>
+                            <tr>
+                                <th>go</th>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for customer in customers %}
+                                <tr>
+                                    <td><a href="{% url 'customer' customer.id %}" class="text-white " ><i class="fa fa-hand-o-right"></i> </a></td>
+                                    <td>{{ customer.cname }}</td>
+                                    <td>{{ customer.mobile }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card text-white bg-dark text-center">
+                    <div class="card-header">
+                        <h4 class="card-title">Ordered Products</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordred table-sm text-center text-white bg-primary">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Ordered Date</th>
+                                <th>Status</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.product.name }}</td>
+                                    <td>{{ order.created_date }}</td>
+                                    <td>{{ order.status }}</td>
+                                    <td><a href="{% url 'update_order' order.id %}" class="btn btn-success">Update</a>
+                                    </td>
+                                    <td><a href="{% url 'delete_order' order.id %}" class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>
